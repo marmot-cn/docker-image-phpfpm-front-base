@@ -19,9 +19,20 @@
 
 * `libssl-dev`
 
-### 编译
+#### gd
 
+* `libfreetype6-dev`
+* `libjpeg62-turbo-dev`
+* `libmcrypt-dev`
+* `libpng12-dev`
 
+### ext
+
+* `memcached-3.0.3`
+* `mongo-1.2.10`
+* `gd`
+* `iconv`: iconv函数库能够完成各种字符集间的转换
+* `mcrypt`: 常用加密算法的封装
 
 ## 版本记录
 
