@@ -157,6 +157,7 @@ RUN set -xe \
 	&& rm -rf /tmp/pear ~/.pearrc
 
 COPY docker-php-ext-* docker-php-entrypoint /usr/local/bin/
+COPY marmot.so /usr/local/lib/php/extensions/no-debug-non-zts-20160303/
 COPY confd composer /usr/local/bin/
 
 ENTRYPOINT ["docker-php-entrypoint"]
