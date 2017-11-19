@@ -214,7 +214,8 @@ RUN set -ex \
     && docker-php-ext-install -j$(nproc) gd \
     && pecl install mongodb-1.2.10 memcached-3.0.3 \
     && docker-php-ext-enable memcached mongodb \
-    && echo "memcached.default_consistent_hash = on" >> /usr/local/etc/php/conf.d/docker-php-ext-memcached.ini 
+    && echo "memcached.default_consistent_hash = on" >> /usr/local/etc/php/conf.d/docker-php-ext-memcached.ini \
+    && echo "extension=marmot.so" > /usr/local/etc/php/conf.d/marmot.ini
 
 EXPOSE 9000
 CMD ["php-fpm"]
