@@ -223,7 +223,6 @@ RUN set -ex \
         && ./configure --prefix=/usr/local/scws \
         && make \
         && make install \
-        && make clean \
         && cd phpext/ \
         && ./configure --with-scws=/usr/local/scws \
         && make \
