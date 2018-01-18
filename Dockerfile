@@ -210,7 +210,7 @@ RUN set -ex \
     libmcrypt-dev \
     libpng12-dev \
     " \
-    && apt-get update && apt-get install -y  git $extensionDeps --no-install-recommends && rm -r /var/lib/apt/lists/* \ 
+    && apt-get update && apt-get install -y git $extensionDeps --no-install-recommends && rm -r /var/lib/apt/lists/* \ 
     && docker-php-ext-install -j$(nproc) iconv mcrypt \
     && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
     && docker-php-ext-install -j$(nproc) gd \
@@ -218,18 +218,6 @@ RUN set -ex \
     && docker-php-ext-enable memcached mongodb \
     && echo "memcached.default_consistent_hash = on" >> /usr/local/etc/php/conf.d/docker-php-ext-memcached.ini \
     && echo "extension=marmot.so" > /usr/local/etc/php/conf.d/marmot.ini \
-    && ( \
-        && cd /data/php7extension/scws-1.2.3 \
-        && ./configure --prefix=/usr/local/scws ; make ; make install \
-        && cd phpext/ \
-        && ./configure --with-scws=/usr/local/scws \
-        && make; make install \
-    ) \
-    && { \
-        echo 'extension = scws.so'; \
-        echo 'scws.default.charset = utf8'; \
-        echo 'scws.default.fpath = /usr/local/scws/etc'; \
-    } | tee /usr/local/etc/php/conf.d/scws.ini \
     && rm -rf /data/php7extension
 
 EXPOSE 9000
