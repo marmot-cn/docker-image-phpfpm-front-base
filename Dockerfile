@@ -218,6 +218,13 @@ RUN set -ex \
     && docker-php-ext-enable memcached mongodb \
     && echo "memcached.default_consistent_hash = on" >> /usr/local/etc/php/conf.d/docker-php-ext-memcached.ini \
     && echo "extension=marmot.so" > /usr/local/etc/php/conf.d/marmot.ini \
+    && ( \
+        && cd /data/php7extension/scws-1.2.3 \
+        && ./configure --prefix=/usr/local/scws ; make ; make install \
+        && cd phpext/ \
+        && ./configure --with-scws=/usr/local/scws \
+        && make; make install \
+    ) \
     && rm -rf /data/php7extension
 
 EXPOSE 9000
