@@ -219,7 +219,23 @@ RUN set -ex \
     && echo "memcached.default_consistent_hash = on" >> /usr/local/etc/php/conf.d/docker-php-ext-memcached.ini \
     && echo "extension=marmot.so" > /usr/local/etc/php/conf.d/marmot.ini \
     && ( \
-    )
+        cd /data/php7extension/scws-1.2.3 \
+        && ./configure --prefix=/usr/local/scws \
+        && make \
+        && make install \
+        && make clean \
+        && cd phpext/ \
+        && ./configure --with-scws=/usr/local/scws \
+        && make \
+        && make install \
+        && make clean \
+    ) \
+    && { \
+        echo 'extension = scws.so'; \
+        echo 'scws.default.charset = utf8'; \
+        echo 'scws.default.fpath = /usr/local/scws/etc'; \
+    } | tee /usr/local/etc/php/conf.d/scws.ini \
+    && rm -rf /data/php7extension/
 
 EXPOSE 9000
 CMD ["php-fpm"]
