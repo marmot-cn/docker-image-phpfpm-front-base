@@ -136,6 +136,7 @@ RUN set -xe \
                 --enable-zip \
                 --enable-bcmath \
                 --with-pdo-mysql=mysqlnd \
+                --with-tidy \
 		\
 # bundled pcre is too old for s390x (which isn't exactly a good sign)
 # /usr/src/php/ext/pcre/pcrelib/pcre_jit_compile.c:65:2: error: #error Unsupported architecture
