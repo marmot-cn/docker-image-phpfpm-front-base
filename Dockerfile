@@ -160,7 +160,7 @@ RUN set -xe \
 
 COPY docker-php-ext-* docker-php-entrypoint /usr/local/bin/
 COPY marmot.so /usr/local/lib/php/extensions/no-debug-non-zts-20160303/
-COPY confd composer /usr/local/bin/
+COPY composer /usr/local/bin/
 ADD scws-1.2.3.tar.bz2 /data/php7extension/
 
 ENTRYPOINT ["docker-php-entrypoint"]
@@ -216,7 +216,7 @@ RUN set -ex \
     && docker-php-ext-install -j$(nproc) iconv mcrypt \
     && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
     && docker-php-ext-install -j$(nproc) gd \
-    && pecl install mongodb-1.4.0 memcached-3.0.3 \
+    && pecl install mongodb-1.4.0 memcached-3.1.5 \
     && docker-php-ext-enable memcached mongodb \
     && echo "memcached.default_consistent_hash = on" >> /usr/local/etc/php/conf.d/docker-php-ext-memcached.ini \
     && echo "extension=marmot.so" > /usr/local/etc/php/conf.d/marmot.ini \
